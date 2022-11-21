@@ -27,6 +27,7 @@
     "require-dev": {
         "symfony/cache": "^5.4|^6.0",
         "symfony/expression-language": "^5.4|^6.0",
+        "symfony/http-client": "^6.0",
         "symfony/rate-limiter": "^5.4|^6.0",
         "symfony/routing": "^5.4|^6.0",
         "symfony/security-csrf": "^5.4|^6.0",
