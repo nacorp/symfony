@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+6.3
+---
+
+* Add CAS access token handler
+
 6.2
 ---
 
