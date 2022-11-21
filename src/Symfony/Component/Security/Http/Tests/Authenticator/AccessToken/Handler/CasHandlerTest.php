@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\AccessToken\Handler\CasHandler;
 
 final class CasHandlerTest extends TestCase
 {
-    public function testWithValidTicket(): void
+    public function testWithValidTicket()
     {
         $response = new MockResponse(<<<BODY
             <cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
@@ -41,7 +41,7 @@ final class CasHandlerTest extends TestCase
         $this->assertEquals('lobster', $username);
     }
 
-    public function testWithInvalidTicket(): void
+    public function testWithInvalidTicket()
     {
         $this->expectException(AuthenticationException::class);
         $this->expectExceptionMessage('CAS Authentication Failure: Ticket ST-1856339 not recognized');
@@ -62,10 +62,10 @@ final class CasHandlerTest extends TestCase
         $casHandler->getUserIdentifierFrom('should-not-work');
     }
 
-    public function testWithInvalidCasResponse(): void
+    public function testWithInvalidCasResponse()
     {
         $this->expectException(AuthenticationException::class);
-        $this->expectExceptionMessage('Invalid CAS response');
+        $this->expectExceptionMessage('Invalid CAS response.');
 
         $response = new MockResponse(<<<BODY
             <cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
@@ -80,10 +80,10 @@ final class CasHandlerTest extends TestCase
         $casHandler->getUserIdentifierFrom('should-not-work');
     }
 
-    public function testWithoutTicket(): void
+    public function testWithoutTicket()
     {
         $this->expectException(AuthenticationException::class);
-        $this->expectExceptionMessage('No ticket found in request');
+        $this->expectExceptionMessage('No ticket found in request.');
 
         $httpClient = new MockHttpClient();
         $requestStack = new RequestStack();
@@ -93,10 +93,10 @@ final class CasHandlerTest extends TestCase
         $casHandler->getUserIdentifierFrom('should-not-work');
     }
 
-    public function testWithInvalidPrefix(): void
+    public function testWithInvalidPrefix()
     {
         $this->expectException(AuthenticationException::class);
-        $this->expectExceptionMessage('Invalid CAS response');
+        $this->expectExceptionMessage('Invalid CAS response.');
 
         $response = new MockResponse(<<<BODY
             <cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>

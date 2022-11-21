@@ -58,7 +58,7 @@ final class CasHandler implements AccessTokenHandlerInterface
             throw new AuthenticationException('CAS Authentication Failure: '.trim((string) $xml->authenticationFailure));
         }
 
-        throw new AuthenticationException('Invalid CAS response');
+        throw new AuthenticationException('Invalid CAS response.');
     }
 
     private function getvalidationUrl(): string
@@ -72,7 +72,7 @@ final class CasHandler implements AccessTokenHandlerInterface
         $query = $request->query->all();
 
         if (!isset($query['ticket'])) {
-            throw new AuthenticationException('No ticket found in request');
+            throw new AuthenticationException('No ticket found in request.');
         }
         unset($query['ticket']);
         $queryString = empty($query) ? '' : '?'.http_build_query($query);
