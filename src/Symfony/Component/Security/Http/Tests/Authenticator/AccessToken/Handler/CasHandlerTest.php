@@ -111,7 +111,7 @@ final class CasHandlerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(new Request(['ticket' => 'PGTIOU-84678-8a9d']));
 
-        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient, prefix: 'invalid-one');
+        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', prefix: 'invalid-one', client: $httpClient);
         $username = $casHandler->getUserIdentifierFrom('PGTIOU-84678-8a9d');
         $this->assertEquals('lobster', $username);
     }
