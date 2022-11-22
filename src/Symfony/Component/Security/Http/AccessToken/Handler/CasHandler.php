@@ -77,7 +77,7 @@ final class CasHandler implements AccessTokenHandlerInterface
 
         return sprintf('%s?ticket=%s&service=%s',
             $this->validationUrl,
-            $request->get('ticket'),
+            $request->query->get('ticket'),
             urlencode($request->getSchemeAndHttpHost().$request->getBaseUrl().$request->getPathInfo().$queryString)
         );
     }
