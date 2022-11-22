@@ -61,7 +61,7 @@ final class CasHandler implements AccessTokenHandlerInterface
         throw new AuthenticationException('Invalid CAS response.');
     }
 
-    private function getvalidationUrl(): string
+    private function getValidationUrl(): string
     {
         $request = $this->requestStack->getCurrentRequest();
 
