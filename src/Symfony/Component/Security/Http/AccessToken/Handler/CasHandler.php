@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Security\Http\AccessToken\Handler;
 
-use LogicException;
-use SimpleXMLElement;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -34,7 +32,7 @@ final class CasHandler implements AccessTokenHandlerInterface
     ) {
         if (null === $client) {
             if (!class_exists(HttpClient::class)) {
-                throw new LogicException(sprintf('You cannot use "%s" as the HttpClient component is not installed. Try running "composer require symfony/http-client".', __CLASS__));
+                throw new \LogicException(sprintf('You cannot use "%s" as the HttpClient component is not installed. Try running "composer require symfony/http-client".', __CLASS__));
             }
 
             $this->client = HttpClient::create();
@@ -48,7 +46,7 @@ final class CasHandler implements AccessTokenHandlerInterface
     {
         $response = $this->client->request('GET', $this->getvalidationUrl());
 
-        $xml = new SimpleXMLElement($response->getContent(), 0, false, $this->prefix, true);
+        $xml = new \SimpleXMLElement($response->getContent(), 0, false, $this->prefix, true);
 
         if (isset($xml->authenticationSuccess)) {
             return (string) $xml->authenticationSuccess->user;
