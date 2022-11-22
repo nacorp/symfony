@@ -17,9 +17,9 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Http\AccessToken\Handler\CasHandler;
+use Symfony\Component\Security\Http\AccessToken\Handler\Cas2Handler;
 
-final class CasHandlerTest extends TestCase
+final class Cas2HandlerTest extends TestCase
 {
     public function testWithValidTicket()
     {
@@ -36,8 +36,8 @@ final class CasHandlerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(new Request(['ticket' => 'PGTIOU-84678-8a9d']));
 
-        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
-        $username = $casHandler->getUserIdentifierFrom('PGTIOU-84678-8a9d');
+        $cas2Handler = new Cas2Handler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
+        $username = $cas2Handler->getUserIdentifierFrom('PGTIOU-84678-8a9d');
         $this->assertEquals('lobster', $username);
     }
 
@@ -58,8 +58,8 @@ final class CasHandlerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(new Request(['ticket' => 'ST-1856339']));
 
-        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
-        $casHandler->getUserIdentifierFrom('should-not-work');
+        $cas2Handler = new Cas2Handler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
+        $cas2Handler->getUserIdentifierFrom('should-not-work');
     }
 
     public function testWithInvalidCasResponse()
@@ -76,8 +76,8 @@ final class CasHandlerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(new Request(['ticket' => 'ST-1856339']));
 
-        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
-        $casHandler->getUserIdentifierFrom('should-not-work');
+        $cas2Handler = new Cas2Handler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
+        $cas2Handler->getUserIdentifierFrom('should-not-work');
     }
 
     public function testWithoutTicket()
@@ -89,8 +89,8 @@ final class CasHandlerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(new Request());
 
-        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
-        $casHandler->getUserIdentifierFrom('should-not-work');
+        $cas2Handler = new Cas2Handler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', client: $httpClient);
+        $cas2Handler->getUserIdentifierFrom('should-not-work');
     }
 
     public function testWithInvalidPrefix()
@@ -111,8 +111,8 @@ final class CasHandlerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push(new Request(['ticket' => 'PGTIOU-84678-8a9d']));
 
-        $casHandler = new CasHandler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', prefix: 'invalid-one', client: $httpClient);
-        $username = $casHandler->getUserIdentifierFrom('PGTIOU-84678-8a9d');
+        $cas2Handler = new Cas2Handler(requestStack: $requestStack, validationUrl: 'https://www.example.com/cas', prefix: 'invalid-one', client: $httpClient);
+        $username = $cas2Handler->getUserIdentifierFrom('PGTIOU-84678-8a9d');
         $this->assertEquals('lobster', $username);
     }
 }

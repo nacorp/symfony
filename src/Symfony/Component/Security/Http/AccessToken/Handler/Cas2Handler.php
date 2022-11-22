@@ -22,7 +22,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  *
  * @author Nicolas Attard <contact@nicolasattard.fr>
  */
-final class CasHandler implements AccessTokenHandlerInterface
+final class Cas2Handler implements AccessTokenHandlerInterface
 {
     public function __construct(
         private readonly RequestStack $requestStack,
